@@ -5,9 +5,9 @@ import com.palmergames.bukkit.TownyChat.config.ChatSettings;
 import com.palmergames.bukkit.TownyChat.events.AsyncChatHookEvent;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyFormatter;
+import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
 import me.clip.placeholderapi.expansion.Cleanable;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
@@ -100,11 +100,11 @@ public class TownyChatExpansion extends PlaceholderExpansion implements Listener
         case "townycolor":
           return r.isMayor() ? ChatSettings.getMayorColour() : r.isKing() ? ChatSettings.getKingColour() : ChatSettings.getResidentColour();
         case "group":
-          return TownyUniverse.getPermissionSource().getPlayerGroup(p);
+          return TownyUniverse.getInstance().getPermissionSource().getPlayerGroup(p);
         case "permprefix":
-          return TownyUniverse.getPermissionSource().getPrefixSuffix(r, "prefix");
+          return TownyUniverse.getInstance().getPermissionSource().getPrefixSuffix(r, "prefix");
         case "permsuffix":
-          return TownyUniverse.getPermissionSource().getPrefixSuffix(r, "suffix");
+          return TownyUniverse.getInstance().getPermissionSource().getPrefixSuffix(r, "suffix");
         case "channeltag":
           return TownyChatFormatter.formatTownyTag(r, Boolean.valueOf(false), Boolean.valueOf(false));
       }
