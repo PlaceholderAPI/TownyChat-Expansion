@@ -3,6 +3,7 @@ package com.extendedclip.papi.expansion.townychat;
 import com.palmergames.bukkit.TownyChat.TownyChatFormatter;
 import com.palmergames.bukkit.TownyChat.config.ChatSettings;
 import com.palmergames.bukkit.TownyChat.events.AsyncChatHookEvent;
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyFormatter;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
@@ -57,7 +58,7 @@ public class TownyChatExpansion extends PlaceholderExpansion implements Listener
 
     try {
 
-      Resident r = TownyUniverse.getDataSource().getResident(p.getName());
+      Resident r = TownyAPI.getInstance().getDataSource().getResident(p.getName());
 
       switch (identifier) {
         case "world":

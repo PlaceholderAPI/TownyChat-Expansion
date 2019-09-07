@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="lib" path="C:/Users/sutto/Documents/Programming/libraries/Paper-1.13.2-b624.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sutto/Downloads/Towny-0.94.0.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sutto/Downloads/PlaceholderAPI-2.10.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sutto/Downloads/TownyChat.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
