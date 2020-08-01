@@ -9,6 +9,7 @@ import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import me.clip.placeholderapi.expansion.Cleanable;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -44,15 +45,16 @@ public class TownyChatExpansion extends PlaceholderExpansion implements Listener
   }
 
   @Override
-  public String onPlaceholderRequest(Player p, String identifier) {
+  public String onRequest(OfflinePlayer p, String identifier) {
+    Player player = (Player) p;
 
     switch (identifier) {
       case "channel_tag":
-        return getChatPlayer(p).getTag();
+        return getChatPlayer(player).getTag();
       case "channel_name":
-        return getChatPlayer(p).getChannel();
+        return getChatPlayer(player).getChannel();
       case "message_color":
-        return getChatPlayer(p).getColor();
+        return getChatPlayer(player).getColor();
     }
 
     try {
@@ -61,7 +63,7 @@ public class TownyChatExpansion extends PlaceholderExpansion implements Listener
 
       switch (identifier) {
         case "world":
-          return String.format(ChatSettings.getWorldTag(), new Object[]{p.getWorld().getName()});
+          return String.format(ChatSettings.getWorldTag(), new Object[]{player.getWorld().getName()});
         case "town":
           return r.hasTown() ? r.getTown().getName() : "";
         case "townformatted":
@@ -99,7 +101,7 @@ public class TownyChatExpansion extends PlaceholderExpansion implements Listener
         case "townycolor":
           return r.isMayor() ? ChatSettings.getMayorColour() : r.isKing() ? ChatSettings.getKingColour() : ChatSettings.getResidentColour();
         case "group":
-          return TownyUniverse.getPermissionSource().getPlayerGroup(p);
+          return TownyUniverse.getPermissionSource().getPlayerGroup(player);
         case "permprefix":
           return TownyUniverse.getPermissionSource().getPrefixSuffix(r, "prefix");
         case "permsuffix":
