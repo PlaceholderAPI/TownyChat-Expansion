@@ -3,7 +3,6 @@ package com.extendedclip.papi.expansion.townychat;
 import com.palmergames.bukkit.TownyChat.TownyChatFormatter;
 import com.palmergames.bukkit.TownyChat.config.ChatSettings;
 import com.palmergames.bukkit.TownyChat.events.AsyncChatHookEvent;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import me.clip.placeholderapi.expansion.Cleanable;
@@ -60,9 +59,9 @@ public class TownyChatExpansion extends PlaceholderExpansion implements Listener
 
       switch (identifier) {
         case "world":
-          return String.format(ChatSettings.getWorldTag(), new Object[]{p.getWorld().getName()});
+          return String.format(ChatSettings.getWorldTag(), p.getWorld().getName());
         case "town":
-          return r.hasTown() ? r.getTown().getName() : "";
+          return r != null && r.hasTown() ? r.getTown().getName() : "";
         case "townformatted":
           return TownyChatFormatter.formatTownTag(r, false, true);
         case "towntag":
@@ -70,7 +69,7 @@ public class TownyChatExpansion extends PlaceholderExpansion implements Listener
         case "towntagoverride":
           return TownyChatFormatter.formatTownTag(r, true, false);
         case "nation":
-          return r.hasNation() ? r.getTown().getNation().getName() : "";
+          return r != null && r.hasNation() ? r.getTown().getNation().getName() : "";
         case "nationformatted":
           return TownyChatFormatter.formatNationTag(r, false, true);
         case "nationtag":
@@ -84,30 +83,30 @@ public class TownyChatExpansion extends PlaceholderExpansion implements Listener
         case "townytagoverride":
           return TownyChatFormatter.formatTownyTag(r, true, false);
         case "title":
-          return r.hasTitle() ? r.getTitle() : "";
+          return r != null && r.hasTitle() ? r.getTitle() : "";
         case "surname":
-          return r.hasSurname() ? r.getSurname() : "";
+          return r != null && r.hasSurname() ? r.getSurname() : "";
         case "townynameprefix":
-          return r.getNamePrefix();
+          return r != null ? r.getNamePrefix() : "";
         case "townynamepostfix":
-          return r.getNamePostfix();
+          return r != null ? r.getNamePostfix() : "";
         case "townyprefix":
-          return r.hasTitle() ? r.getTitle() : r.getNamePrefix();
+          return r == null ? "" : (r.hasTitle() ? r.getTitle() : r.getNamePrefix());
         case "townypostfix":
-          return r.hasSurname() ? r.getSurname() : r.getNamePostfix();
+          return r == null ? "" : (r.hasSurname() ? r.getSurname() : r.getNamePostfix());
         case "townycolor":
-          return r.isMayor() ? ChatSettings.getMayorColour() : r.isKing() ? ChatSettings.getKingColour() : ChatSettings.getResidentColour();
+          return  r == null ? "" : (r.isMayor() ? ChatSettings.getMayorColour() : r.isKing() ? ChatSettings.getKingColour() : ChatSettings.getResidentColour());
         case "group":
           return TownyUniverse.getInstance().getPermissionSource().getPlayerGroup(p);
         case "permprefix":
-          return TownyUniverse.getInstance().getPermissionSource().getPrefixSuffix(r, "prefix");
+          return  r == null ? "" : TownyUniverse.getInstance().getPermissionSource().getPrefixSuffix(r, "prefix");
         case "permsuffix":
-          return TownyUniverse.getInstance().getPermissionSource().getPrefixSuffix(r, "suffix");
+          return  r == null ? "" : TownyUniverse.getInstance().getPermissionSource().getPrefixSuffix(r, "suffix");
         case "channeltag":
-          return TownyChatFormatter.formatTownyTag(r, Boolean.valueOf(false), Boolean.valueOf(false));
+          return  r == null ? "" : TownyChatFormatter.formatTownyTag(r, Boolean.FALSE, Boolean.FALSE);
       }
 
-    } catch (NotRegisteredException e) {
+    } catch (Throwable e) {
       return "";
     }
     return null;
